@@ -1,6 +1,7 @@
 import { Router } from "express";
 import UserController from "../controllers/UserController";
 import { celebrate, Joi, Segments } from "celebrate";
+import { isAuthenticated } from "shared/infra/http/middleware/isAuthenticated";
 
 const userController = new UserController();
 const userRoutes = Router();
@@ -28,6 +29,7 @@ userRoutes.post(
             email: Joi.string().email(),
         })
     }),
+    isAuthenticated,
     userController.update
 );
 
@@ -38,6 +40,7 @@ userRoutes.delete(
             id: Joi.string().required()
         })
     }),
+    isAuthenticated,
     userController.delete
 );
 

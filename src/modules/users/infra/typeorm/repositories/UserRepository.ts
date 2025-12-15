@@ -27,7 +27,10 @@ class UserRepository implements IUserRepository {
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    return await this.ormRepository.findOne({ where: { email } });
+    return await this.ormRepository.findOne({
+      where: { email },
+      relations: ["reviews"],
+    });
   }
 
   async findByName(name: string): Promise<User | null> {
