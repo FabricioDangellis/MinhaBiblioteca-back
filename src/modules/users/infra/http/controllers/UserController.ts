@@ -1,3 +1,4 @@
+import { instanceToInstance } from "class-transformer";
 import { Request, Response } from "express";
 import CreateUserService from "modules/users/services/CreateUserService";
 import DeleteUserService from "modules/users/services/DeleteUserService";
@@ -17,7 +18,7 @@ class UserController {
       reviews: [],
     });
 
-    response.json(user);
+    response.json(instanceToInstance(user));
   }
 
   async update(request: Request, response: Response): Promise<void> {
