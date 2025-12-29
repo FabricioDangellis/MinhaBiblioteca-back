@@ -25,6 +25,7 @@
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "celebrate": "^15.0.3",
+    "class-transformer": "^0.5.1",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",

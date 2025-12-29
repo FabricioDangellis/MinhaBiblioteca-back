@@ -1,9 +1,11 @@
+import { User } from "../../../../users/infra/typeorm/entities/User";
 import { Review } from "../../../../reviews/infra/typeorm/entities/Review";
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
@@ -16,14 +18,20 @@ export class Book {
   @Column()
   title: string;
 
-  @Column({ unique: true })
+  @Column()
   author: string;
 
   @Column()
-  publischer: string;
+  publisher: string;
+
+  @Column("text", { array: true })
+  genres: string[];
 
   @Column({ nullable: true })
   coverUrl?: string;
+
+  @ManyToOne(() => User, user => user.books, {onDelete: "CASCADE"})
+  user: User;
 
   @OneToMany(() => Review, (review) => review.book)
   reviews: Review[];
